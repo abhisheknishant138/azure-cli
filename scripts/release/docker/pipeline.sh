@@ -16,3 +16,4 @@ docker build --no-cache \
              $BUILD_SOURCESDIRECTORY
 
 docker save -o "$BUILD_STAGINGDIRECTORY/docker-azure-cli-${CLI_VERSION}.tar" $IMAGE_NAME:latest
+docker buildx build --platform linux/arm64 -t odidev/azurecli_image:latest --push .
