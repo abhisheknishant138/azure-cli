@@ -256,6 +256,15 @@ jobs:
   pool:
     vmImage: 'ubuntu-20.04'
   steps:
+  - task: CmdLine@2
+    displayName: qemu install
+    inputs: 
+      script: |
+        docker login -u dockerhub_username -p dockerhub_password
+        docker run --privileged --rm tonistiigi/binfmt --install arm64
+        docker run --privileged --rm tonistiigi/binfmt
+        docker buildx create --use
+  
   - task: Bash@3
     displayName: 'Bash Script'
     inputs:
